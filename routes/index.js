@@ -25,11 +25,15 @@ function get(req, res) {
 function getProfiles(req, res) {
   knex('users')
     .join('profiles', 'users.id', '=', 'profiles.user_id')
-    .select('users.id', 'users.name', 'profiles.profilePic as pic', 'users.email', 'profiles.URL')
+    .join('blogs', 'users.id', '=', 'blogs.user_id')
+    .select('users.id', 'users.name', 'profiles.profilePic as pic', 'users.email', 'profiles.URL', 'blogs.title as title', 'blogs.content as content')
     .where('users.id', '=', req.params.id)
     .then(function (users) {
       res.render('profile', {
-        user: users[0]
+        user: users[0],
+        posts: users.map(u => {
+          return { title: u.title, content: u.content }
+        })
       })
     })
     .catch(function (err) {
