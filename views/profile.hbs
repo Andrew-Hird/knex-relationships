@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Profile</title>
   </head>
   <body>
     <h1>{{user.name}}</h1>
@@ -14,10 +14,9 @@
     <br>
     <h2>Blogs:</h2>
     {{#each posts}}
-    <a href="#">{{title}}</a>
+    <a href="/blog/{{blogId}}">{{title}}</a>
     <p>{{content}}</p>
     {{/each}}
-    <!-- {{user.title}} -->
 
     <h2>Create Blog Post</h2>
     <form action="/newBlog" method="post">

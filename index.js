@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', index.get)
 app.get('/profile/:id', index.getProfiles)
+app.get('/blog/:blogId', index.getBlog)
 app.post('/newUser', index.newUser)
 app.post('/newBlog', index.newBlog)
 

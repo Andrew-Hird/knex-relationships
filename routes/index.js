@@ -6,7 +6,8 @@ module.exports = {
   get: get,
   getProfiles: getProfiles,
   newUser: newUser,
-  newBlog: newBlog
+  newBlog: newBlog,
+  getBlog: getBlog
 }
 
 function get(req, res) {
@@ -26,7 +27,7 @@ function getProfiles(req, res) {
   knex('users')
     .join('profiles', 'users.id', '=', 'profiles.user_id')
     .join('blogs', 'users.id', '=', 'blogs.user_id')
-    .select('users.id', 'users.name', 'profiles.profilePic as pic', 'users.email', 'profiles.URL', 'blogs.title as title', 'blogs.content as content')
+    .select('users.id', 'users.name', 'profiles.profilePic as pic', 'users.email', 'profiles.URL', 'blogs.title as title', 'blogs.content as content', 'blogs.id as blogId')
     .where('users.id', '=', req.params.id)
     .then(function (users) {
       res.render('profile', {
@@ -34,6 +35,21 @@ function getProfiles(req, res) {
         posts: users.map(u => {
           return { title: u.title, content: u.content }
         })
+      })
+    })
+    .catch(function (err) {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+}
+
+function getBlog(req, res) {
+  knex('users')
+    .join('profiles', 'users.id', '=', 'profiles.user_id')
+    .join('blogs', 'users.id', '=', 'blogs.user_id')
+    .select('users.id', 'users.name', 'profiles.profilePic as pic', 'users.email', 'profiles.URL', 'blogs.title as title', 'blogs.content as content', 'blogs.id as blogId')
+    .then(function (blogs) {
+      res.render('blog', {
+        blogs: blog[0]
       })
     })
     .catch(function (err) {
