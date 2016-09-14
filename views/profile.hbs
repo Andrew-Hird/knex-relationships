@@ -12,6 +12,14 @@
     <br>
     {{user.URL}}
     <br>
+    <h2>Create Blog Post</h2>
+    <form action="/newBlog" method="post">
+      <input name="title" placeholder="title">
+      <input name="content" placeholder="blog content">
+      <input name="id" type="hidden" value="{{user.id}}">
+      <input type="submit">
+    </form>
+    <br>
     <a href="/"><button>back</button></a>
   </body>
 </html>

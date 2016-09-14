@@ -5,7 +5,8 @@ var knex = require('knex')(development)
 module.exports = {
   get: get,
   getProfiles: getProfiles,
-  newUser: newUser
+  newUser: newUser,
+  newBlog: newBlog
 }
 
 function get(req, res) {
@@ -43,7 +44,6 @@ function newUser(req, res) {
     url: req.body.url,
     profilePic: req.body.profilePic
   }
-
   knex('users')
     .insert({
       name: userDetails.name,
@@ -51,13 +51,27 @@ function newUser(req, res) {
     })
     .then(function (ids) {
       return knex('profiles')
-      .insert({
-        user_id: ids[0],
-        URL: userDetails.url,
-        profilePic: userDetails.profilePic
-      })
+        .insert({
+          user_id: ids[0],
+          URL: userDetails.url,
+          profilePic: userDetails.profilePic
+        })
     })
+    .then(function (data) {
+      res.redirect('/')
+    })
+    .catch(function (err) {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+}
 
+function newBlog(req, res) {
+  knex('blogs')
+    .insert({
+      user_id: parseInt(req.body.id),
+      title: req.body.title,
+      content: req.body.content,
+    })
     .then(function (data) {
       res.redirect('/')
     })
