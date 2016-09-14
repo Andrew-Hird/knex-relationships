@@ -11,5 +11,14 @@
       <li> <a href="/profile/{{id}}">{{name}}</a> </li>
     {{/each}}
     </ul>
+
+    <form action="/newUser" method="post">
+      <input name="name" placeholder="name">
+      <input name="email" placeholder="email">
+      <input name="url" placeholder="url">
+      <input name="profilePic" placeholder="profile pic">
+      <input type="submit">
+    </form>
+
   </body>
 </html>
