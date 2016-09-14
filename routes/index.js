@@ -21,7 +21,7 @@ function get (req, res) {
 function getProfiles (req, res) {
   knex('users')
   .join('profiles', 'users.id', '=', 'profiles.user_id')
-  .select('users.id', 'users.name', 'profiles.profilePic as pic')
+  .select('users.id', 'users.name', 'profiles.profilePic as pic', 'users.email', 'profiles.URL')
   .where('users.id', '=', req.params.id)
   .then(function (users) {
     res.render('profile', {user: users[0]})
