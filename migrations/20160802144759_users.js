@@ -10,6 +10,12 @@ exports.up = function (knex, Promise) {
       table.integer('user_id').references('users.id')
       table.string('URL')
       table.string('profilePic')
+    }),
+    knex.schema.createTable('blogs', function (table) {
+      table.increments('id').primary()
+      table.integer('user_id').references('users.id')
+      table.string('title')
+      table.string('content')
     })
   ])
 }

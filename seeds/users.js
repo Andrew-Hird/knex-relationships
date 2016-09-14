@@ -7,18 +7,30 @@ exports.seed = function (knex, Promise) {
       knex('users').insert({name: 'Ambitious Aardvark', email: 'aardvark@example.org'})
         .then(function (ids) {
           return knex('profiles').insert({user_id: ids[0], URL: 'URL', profilePic: 'profilePic'})
+          .then(function (ids) {
+            return knex('blogs').insert({user_id: ids[0], title: 'title', content: 'blog content'})
+          })
         }),
       knex('users').insert({name: 'Bamboozled Baboon', email: 'baboon@example.org'})
         .then(function (ids) {
           return knex('profiles').insert({user_id: ids[0], URL: 'URL', profilePic: 'profilePic'})
+          .then(function (ids) {
+            return knex('blogs').insert({user_id: ids[0], title: 'title', content: 'blog content'})
+          })
         }),
       knex('users').insert({name: 'Curious Capybara', email: 'capybara@example.org'})
         .then(function (ids) {
           return knex('profiles').insert({user_id: ids[0], URL: 'URL', profilePic: 'profilePic'})
+          .then(function (ids) {
+            return knex('blogs').insert({user_id: ids[0], title: 'title', content: 'blog content'})
+          })
         }),
       knex('users').insert({name: 'Dilapidated Duck', email: 'duck@example.org'})
       .then(function (ids) {
         return knex('profiles').insert({user_id: ids[0], URL: 'URL', profilePic: 'profilePic'})
+        .then(function (ids) {
+          return knex('blogs').insert({user_id: ids[0], title: 'title', content: 'blog content'})
+        })
       }),
       // knex('users').insert({id: 99905, name: 'Exuberant Elephant', email: 'elephant@example.org'}),
       // knex('users').insert({id: 99906, name: 'Fascinated Flying Fox', email: 'flying.fox@example.org'}),
